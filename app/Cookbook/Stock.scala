@@ -9,7 +9,11 @@ case class StockInstance(
                         volume: Long
                         )
 
+object NetworkUtils {
 
+  def getUrl(url: String): String = { url }
+
+}
 
 object StockUtils {
 
