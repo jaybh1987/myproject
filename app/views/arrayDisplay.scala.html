@@ -1,0 +1,7 @@
+@import scala.collection.mutable.ArrayBuffer
+@(arrayValue: ArrayBuffer[String])(implicit request: RequestHeader, messageProvider: MessagesProvider)
+
+
+@for(i <- arrayValue){
+    @i
+}

@@ -1,0 +1,44 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# https://www.playframework.com/documentation/latest/ScalaRouting
+# ~~~~
+
+# An example controller showing a sample home page
+GET     /                               controllers.HomeController.index
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file                   controllers.Assets.versioned(path="/public", file: Asset)
+
+GET     /userData                       controllers.HomeController.userData
+POST    /post                           controllers.HomeController.post
+GET     /productInfo                    controllers.HomeController.displayProduct
+GET    /displayStr:name                 controllers.HomeController.displayString(name)
+
+#duck desing pattern
+GET     /callduck                       controllers.HomeController.duckFly
+GET     /modelduck                      controllers.HomeController.modelDuck
+
+
+
+#json practise
+GET     /callJson                       controllers.TaskController.jsonStringParsing
+
+#collection practise
+
+GET     /addstr/:str                    controllers.TaskController.addToArray(str)
+GET     /ls                             controllers.TaskController.listMethod
+GET     /dropElement                    controllers.ExampleController.dropRecursive
+
+#stringencode
+
+GET     /encode                         controllers.TaskController.label
+
+
+#cookbook controller
+
+#GET     /attempt                        controllers.CookBookController.callAttemptMethod
+GET     /dog                            controllers.CookBookController.testDog
+
+#problemviews
+
+GET     /mone                           controllers.ProblemController.flatMapsublist

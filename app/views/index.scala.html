@@ -1,0 +1,17 @@
+@import form.UserData
+@import helper._
+@(userForm: Form[UserData])(implicit request: RequestHeader, messageProvider: MessagesProvider)
+
+@main("Welcome to Play") {
+
+
+
+
+@helper.form(action = routes.HomeController.post()) {
+      @CSRF.formField
+      @helper.inputText(userForm("name"))
+      @helper.inputText(userForm("age"))
+      <input type="submit" value="submit" name="submit"/>
+}
+
+}

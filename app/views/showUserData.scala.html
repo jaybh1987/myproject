@@ -1,0 +1,12 @@
+@import form.UserData
+
+@(userData: UserData)
+
+
+@main("Welcome to Play") {
+<h1>User Data Page.</h1>
+
+        @userData.name
+        <br>
+        @userData.age
+}

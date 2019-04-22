@@ -1,0 +1,10 @@
+@import play.api.libs.json._
+
+@(jsValue: JsValue)(implicit request: RequestHeader, messageProvider: MessagesProvider)
+
+
+@(jsValue \ "name").get
+<br>
+@(jsValue \ "location" \ "lat").get
+<br>
+@(jsValue \ "residents" \ 1 \ "name").get
