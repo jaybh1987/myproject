@@ -6,3 +6,14 @@ target
 /.project
 /.settings
 /RUNNING_PID
+/.g8
+/build.gradle
+/build.sbt
+/gradle
+/gradlew
+/gradlew.bat
+/project
+/public
+/test
+
+
