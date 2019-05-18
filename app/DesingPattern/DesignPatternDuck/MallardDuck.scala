@@ -1,4 +1,4 @@
-package DesignPatternDuck
+package DesingPattern.DesignPatternDuck
 
 class MallardDuck(quackBehavior: QuackBehavior, flyBehavior: FlyBehavior) extends Duck{
 

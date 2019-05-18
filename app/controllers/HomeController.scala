@@ -1,6 +1,7 @@
 package controllers
 
-import DesignPatternDuck._
+import DesingPattern.DesignPatternDuck._
+import DesingPattern._
 import javax.inject._
 import play.api._
 import play.api.mvc._

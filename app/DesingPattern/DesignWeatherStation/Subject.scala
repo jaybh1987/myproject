@@ -1,4 +1,4 @@
-package DesignWeatherStation
+package DesingPattern.DesignWeatherStation
 
 trait Subject {
 

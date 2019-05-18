@@ -1,4 +1,4 @@
-package DesignPatternDuck
+package DesingPattern.DesignPatternDuck
 
 class Duck {
 
