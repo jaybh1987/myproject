@@ -1,7 +1,7 @@
 package controllers
 
+import Books.nintynineproblemofscala.Problem
 import javax.inject.{Inject, Singleton}
-import nintynineproblemofscala.Problem
 import play.api.mvc.{AbstractController, ControllerComponents}
 
 

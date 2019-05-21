@@ -1,4 +1,4 @@
-package Cookbook
+package Books.Cookbook
 
 case class Stock (symbol: String, company: String)
 

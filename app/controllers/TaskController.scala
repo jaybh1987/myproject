@@ -1,6 +1,6 @@
 package controllers
 
-import ListMethod.ClassList
+import Books.ListMethod.ClassList
 import javax.inject.Inject
 import play.api.mvc.{AbstractController, ControllerComponents}
 import play.api.libs.json._

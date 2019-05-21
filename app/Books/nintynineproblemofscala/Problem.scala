@@ -1,4 +1,4 @@
-package nintynineproblemofscala
+package Books.nintynineproblemofscala
 
 class Problem {
 

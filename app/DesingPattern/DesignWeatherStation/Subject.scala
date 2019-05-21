@@ -1,8 +1,8 @@
-package DesingPattern.DesignWeatherStation
-
-trait Subject {
-
-  def registerObserver(observer: Observer)
-  def removeObserver(observer: Observer)
-  def notifyObserver
-}
+//package DesingPattern.DesignWeatherStation
+//
+//trait Subject {
+//
+//  def registerObserver( o: Observer)
+//  def removeObserver(o: Observer)
+//  def notifyObserver : Unit
+//}

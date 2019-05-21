@@ -1,4 +1,4 @@
-package Cookbook
+package Books.Cookbook
 
 //final case class Failed[A](val exception: Exception) extends Attempt[A] {
 //  isSuccess = false

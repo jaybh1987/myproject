@@ -1,7 +1,4 @@
-package problemsOfScala
-
-
-
+package Books.problemsOfScala
 
 class Example
 

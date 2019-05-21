@@ -1,5 +1,7 @@
-package DesingPattern.DesignWeatherStation
-
-trait Observer {
-  def update(temp: Float, humidity: Float, pressure: Float)
-}
+//package DesingPattern.DesignWeatherStation
+//
+//trait Observer {
+//
+//  def update(temp: Double, humidity: Double, pressure: Double): Unit
+//
+//}
