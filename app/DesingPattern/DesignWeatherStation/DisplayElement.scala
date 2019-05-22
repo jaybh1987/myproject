@@ -1,7 +1,7 @@
-//package DesingPattern.DesignWeatherStation
-//
-//trait DisplayElement {
-//
-//  def display: Unit
-//
-//}
+package DesingPattern.DesignWeatherStation
+
+trait DisplayElement {
+
+  def display: Unit
+
+}
