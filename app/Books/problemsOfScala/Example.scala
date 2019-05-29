@@ -31,3 +31,18 @@ object Example {
   }
 
 }
+
+
+case class TemplateData(id: Long, price: Double, name: String)
+
+case class SubModel(id: Long, price: Double, name: String)
+
+
+
+
+
+
+
+
+
+

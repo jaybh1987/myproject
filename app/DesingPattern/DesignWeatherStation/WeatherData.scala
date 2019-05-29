@@ -4,7 +4,7 @@ import scala.collection.mutable.ListBuffer
 
 class WeatherData extends Subject {
 
-  val observers: ListBuffer[Observer] = ListBuffer.empty
+  var observers: ListBuffer[Observer] = ListBuffer.empty
   var temp: Double = Double.NaN
   var humidity: Double = Double.NaN
   var pressure: Double = Double.NaN

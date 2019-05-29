@@ -53,8 +53,21 @@ class Cbook {
   def funForDog[A](animal: A)(implicit s: Humanish.HumanLike[A]) = {
     s.speak(animal)
   }
+
+
+  def forYieldMethod(i: Int): Seq[Int] = {
+    var cumulate: Int = 0
+    val c = 0.to(i).map { i =>
+      val s = i
+      cumulate = cumulate + s
+      (i, s, cumulate)
+    }.map {
+      case ((i@_), (s@_), (cumulate@_)) => cumulate
+    }
+    c
+  }
+
+
+
 }
-
-
-
 

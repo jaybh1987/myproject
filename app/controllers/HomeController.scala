@@ -1,14 +1,18 @@
 package controllers
 
+import Books.problemsOfScala.TemplateData
 import DesingPattern.DesignPatternDuck._
-import DesingPattern.DesignWeatherStation.WeatherStation
+import DesingPattern.DesignWeatherStation.{WeatherDataPull, WeatherStation, WeatherStationPull}
 import DesingPattern._
 import javax.inject._
 import play.api._
 import play.api.mvc._
 import play.api.data.Form
 import play.api.data.Forms._
-import play.api.libs.json._
+import org.json4s.DefaultFormats
+import org.json4s._
+import org.json4s.jackson._
+
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -29,8 +33,6 @@ play.api.i18n .I18nSupport {
 
     Ok("")
   }
-
-
 
   def duckFly = Action { implicit  request =>
 
@@ -71,6 +73,12 @@ play.api.i18n .I18nSupport {
 
     val v = new WeatherStation
     println(v.main(Array("a")))
+    Ok("")
+  }
+
+  def observerPatternPull = Action{implicit request =>
+    val v = new WeatherStationPull
+    println(v.main(Array("j")))
     Ok("")
   }
 

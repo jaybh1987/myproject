@@ -13,3 +13,4 @@ GET     /assets/*file                   controllers.Assets.versioned(path="/publ
 
 
 GET     /observer                       controllers.HomeController.observerPatten
+GET     /observerpull                   controllers.HomeController.observerPatternPull
