@@ -9,6 +9,7 @@ class Problem {
       case subList@(_ :: tail) => f(subList) ::: flatMapSublists(tail)(f)
     }
   }
+
   //explain execution
   /** assume input is List(1,2,3)(helperFunction)
     *
