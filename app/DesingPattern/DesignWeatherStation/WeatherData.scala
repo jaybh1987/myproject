@@ -12,6 +12,7 @@ class WeatherData extends Subject {
   override def registerObserver(o: Observer) = observers :+ o
 
   override def notifyObserver : Unit = {
+    println("notification send.")
     for (i <- 0 to observers.length - 1) {
       val obs = observers(i)
       obs.update(temp, humidity, pressure)

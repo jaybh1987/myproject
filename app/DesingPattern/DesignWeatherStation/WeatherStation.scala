@@ -9,7 +9,7 @@ class WeatherStation extends App{
     val currentConditionDisplay = CurrentConditionDisplay(weatherData)
 
     weatherData.setMeasurement(10, 20 , 30)
-
+    weatherData.measurementChange()
     println("temp = :"+weatherData.temp)
     println("humidity = :"+weatherData.humidity)
     println("pressure = :"+weatherData.pressure)
@@ -18,13 +18,15 @@ class WeatherStation extends App{
 
     weatherData.setMeasurement(20, 30 , 80)
 
+    weatherData.measurementChange()
     println("temp = :"+weatherData.temp)
     println("humidity = :"+weatherData.humidity)
     println("pressure = :"+weatherData.pressure)
     println("heatIndex = :"+HeatIndexDisplay(weatherData.temp, weatherData.humidity))
 
-    weatherData.setMeasurement(40, 20 , 11)
 
+    weatherData.setMeasurement(40, 20 , 11)
+    weatherData.measurementChange()
     println("temp = :"+weatherData.temp)
     println("humidity = :"+weatherData.humidity)
     println("pressure = :"+weatherData.pressure)
