@@ -2,6 +2,9 @@
 
 @(ls: List[Int])(implicit request: RequestHeader, messageProvider: MessagesProvider)
 
+
+
+
 @for(i <- ls){
-    @i
+    <div class="ans">@i</div>
 }

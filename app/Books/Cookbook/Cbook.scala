@@ -1,5 +1,11 @@
 package Books.Cookbook
 
+import org.json4s._
+import org.json4s.jackson.JsonMethods._
+import org.json4s.JsonDSL._
+import org.json4s.JsonDSL.WithDouble._
+import org.json4s.JsonDSL.WithBigDecimal._
+
 //final case class Failed[A](val exception: Exception) extends Attempt[A] {
 //  isSuccess = false
 //  override def get = throw exception
@@ -26,6 +32,8 @@ package Books.Cookbook
 //    }
 //  }
 //}
+
+
 
   trait Animal
   final case class Dog(name: String) extends Animal
@@ -71,3 +79,87 @@ class Cbook {
 
 }
 
+class ScalaReference {
+
+  val e = List(1,2,3,4,5)
+  val e1 = List(5,6,7,8,9)
+
+  val forAndYield = for(p <- e) yield e
+  //translated.
+  val forAndYieldTrans = e.map(p => e)
+
+  val onlyFor = for(p <- e) e
+  //translated.
+  val onlyForTrans = e.foreach(p => e)
+
+  val forWithMultiGenrator = for{
+          p <- e;
+          p1 <- e1
+  } yield e
+
+  val forWithMultiGenratorTrans = e.flatMap( p => for(p1 <- e1) yield e)
+
+
+
+}
+
+  class JsonSample {
+
+    implicit val formats = DefaultFormats
+
+    case class Child(name: String, age: Int, birthdate: Option[java.util.Date])
+    case class Address(Street: String, city: String)
+    case class Person(name: String, address: Address, childres: DataStructure.List[Child])
+
+
+
+
+    def showJson = {
+      val json = parse(
+        """
+          |{
+          |   "name": "joe",
+          |   "address" : {
+          |     "Street": "op road"
+          |     "city" : "vadodara"
+          |   }
+          |   "childres": [
+          |     {
+          |       "name":"mary"
+          |       "age":5
+          |       "birthdate":"2004-09-04t18:06:22z"
+          |     },
+          |     {
+          |       "name":"mzy"
+          |       "age":3
+          |     }
+          |   ]
+          |}
+        """.stripMargin)
+
+      json.extract[Person]
+
+      println(Person)
+    }
+
+    //[{"modelid":11}, {"modelid": 12}]
+
+    val json = parse(
+      """
+        |{
+        |   "data":[
+        |     {
+        |       "id": 1,
+        |       "qty": 2
+        |     },
+        |     {
+        |       "id": 2,
+        |       "qty": 5
+        |     }
+        |   ],
+        |   "template": 1
+        |}
+      """.stripMargin)
+
+
+  }

@@ -1,5 +1,6 @@
 package controllers
 
+import Books.Cookbook.JsonSample
 import Books.problemsOfScala.TemplateData
 import DesingPattern.DesignPatternDuck._
 import DesingPattern.DesignWeatherStation.{WeatherDataPull, WeatherStation, WeatherStationPull}
@@ -12,7 +13,7 @@ import play.api.data.Forms._
 import org.json4s.DefaultFormats
 import org.json4s._
 import org.json4s.jackson._
-
+import Books.Cookbook.JsonSample
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -33,6 +34,7 @@ play.api.i18n .I18nSupport {
 
     Ok("")
   }
+
 
   def duckFly = Action { implicit  request =>
 
@@ -82,5 +84,9 @@ play.api.i18n .I18nSupport {
     Ok("")
   }
 
+  def showData = Action{ implicit request =>
+    val b = List(1,2,3,4,5)
+    Ok(ExampleViews.html.result(b))
+  }
 
 }
