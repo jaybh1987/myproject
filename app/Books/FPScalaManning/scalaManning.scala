@@ -13,7 +13,7 @@ object ScalaManning {
     loop(0)
   }
 
-  //polymorphic function to find a string in array.
+  //polymorphic function to find a   string in array.
   def findFirst[A](ss: Array[A], p: (A) => Boolean): Int = {
 
     def loop(n: Int): Int = {
@@ -50,9 +50,5 @@ object ScalaManning {
     loop(0)
   }
 
-}
-
-trait Ex {
-  def partial11[A, B, C](a: A, f:(A, B) => C): B => C
 }
 

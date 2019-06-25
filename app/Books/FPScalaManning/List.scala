@@ -1,5 +1,4 @@
-package Books.Cookbook.DataStructure
-
+package Books.FPScalaManning
 
 sealed trait List[+A]
 case object Nil extends List[Nothing]
@@ -51,6 +50,25 @@ object List {
     case _ => as
   }
 
+  def foldRight[A, B](xs: List[A], z: B) (f:(A, B) => B): B = xs match {
+    case Nil => z
+    case Cons(h, tail) => f(h, foldRight(tail, z)(f))
+  }
 
+  def length[A](as: List[A]): Int = as match {
+    case Nil => 0
+    case Cons(h, tail) => 1 + length(tail)
+  }
 
+  //function must be tail recursive.
+  def foldLeft[A, B](ls: List[A], z: B)(f: (B, A) => B): B = ls match {
+     case Nil => z
+     case Cons(h, tail) => foldLeft(tail, f(z, h))(f)
+  }
+
+  def sumUsingFoldLeft(xs: List[Int]): Int = foldLeft(xs, 0)( (x, y) => x + y)
+
+  def productUsingFoldLeft(xs: List[Double]): Double = foldLeft(xs, 1.0)((x, y) => x * y)
+
+  def lengthUsingFoldLeft(xs: List[Int]): Int = foldLeft(xs, 0)((x, y) => x + 1)
 }
