@@ -15,3 +15,9 @@ GET     /assets/*file                   controllers.Assets.versioned(path="/publ
 GET     /observer                       controllers.HomeController.observerPatten
 GET     /observerpull                   controllers.HomeController.observerPatternPull
 GET     /call                           controllers.HomeController.showData
+GET     /btest                          controllers.HomeController.barcode
+GET     /rev                            controllers.HomeController.reverseList
+GET     /append                         controllers.HomeController.appendList
+
+GET     /f                              controllers.HomeController.contentType
+GET     /test                           controllers.HomeController.multipleData

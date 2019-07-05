@@ -1,19 +1,18 @@
 package controllers
 
-import Books.Cookbook.JsonSample
-import Books.problemsOfScala.TemplateData
+import java.io.File
+
+import Books.FPScalaManning.Cons
 import DesingPattern.DesignPatternDuck._
-import DesingPattern.DesignWeatherStation.{WeatherDataPull, WeatherStation, WeatherStationPull}
-import DesingPattern._
+import DesingPattern.DesignWeatherStation.{WeatherStation, WeatherStationPull}
+import akka.http.impl.util.JavaAccessors
+import akka.stream.scaladsl.{FileIO, Source}
+import akka.util.ByteString
 import javax.inject._
-import play.api._
 import play.api.mvc._
-import play.api.data.Form
-import play.api.data.Forms._
-import org.json4s.DefaultFormats
-import org.json4s._
-import org.json4s.jackson._
-import Books.Cookbook.JsonSample
+import play.http.HttpEntity
+import work.CodeB
+import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -35,6 +34,13 @@ play.api.i18n .I18nSupport {
     Ok("")
   }
 
+
+  def barcode = Action{ implicit  request: Request[AnyContent] =>
+
+      val c = new CodeB
+      c.fun("12345678")
+      Ok("")
+  }
 
   def duckFly = Action { implicit  request =>
 
@@ -78,15 +84,42 @@ play.api.i18n .I18nSupport {
     Ok("")
   }
 
-  def observerPatternPull = Action{implicit request =>
+  def observerPatternPull = Action {implicit request =>
     val v = new WeatherStationPull
     println(v.main(Array("j")))
     Ok("")
   }
 
-  def showData = Action{ implicit request =>
+  def showData = Action { implicit request =>
     val b = List(1,2,3,4,5)
     Ok(ExampleViews.html.result(b))
   }
+
+  def reverseList = Action { implicit  request =>
+    import Books.FPScalaManning.Nil
+    val ans = Books.FPScalaManning.List.revTest(Cons(1, Cons(2, Nil)))
+    println("output = "+ans)
+    Ok("")
+  }
+
+  def appendList = Action { implicit request =>
+    import Books.FPScalaManning.Nil
+    val ans = Books.FPScalaManning.List.append(4, Cons(1, Cons(2, Nil)))
+    println("output = "+ans)
+
+    Ok("")
+  }
+
+  def contentType = Action { implicit request =>
+    Ok.sendFile(
+      content = new File("/home/laitmatus/Desktop/car.pdf"),
+      fileName = _ => "s.pdf"
+    )
+  }
+
+  def multipleData = Action { implicit request =>
+    Ok(ExampleViews.html.genericData(List(1,2,3)))
+  }
+
 
 }

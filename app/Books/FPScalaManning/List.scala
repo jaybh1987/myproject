@@ -55,7 +55,7 @@ object List {
     case Cons(h, tail) => f(h, foldRight(tail, z)(f))
   }
 
-  def length[A](as: List[A]): Int = as match {
+  def length[A](as  : List[A]): Int = as match {
     case Nil => 0
     case Cons(h, tail) => 1 + length(tail)
   }
@@ -71,4 +71,14 @@ object List {
   def productUsingFoldLeft(xs: List[Double]): Double = foldLeft(xs, 1.0)((x, y) => x * y)
 
   def lengthUsingFoldLeft(xs: List[Int]): Int = foldLeft(xs, 0)((x, y) => x + 1)
+
+
+  def reverse[A](xs: List[A]): List[A] = foldLeft(xs, List[A]())( (x, y) => Cons(y, x))
+
+  def revTest[A](l: List[A]): List[A] = reverse(l)
+
+  def append[A](x: A, xs: List[A]): List[A] = foldLeft(reverse(xs), Cons(x, Nil) )( (b, a) => Cons(a, b))
+
+
 }
+

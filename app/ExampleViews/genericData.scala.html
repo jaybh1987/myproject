@@ -1,0 +1,12 @@
+@(ls: List[Int])(implicit request: RequestHeader, messageProvider: MessagesProvider)
+
+@for(i <- ls){
+    <div style="
+    color: black;
+    background-color: green;
+    height: 50px;
+    width: 100px;
+    ">
+        @i
+    </div>
+}
