@@ -1,5 +1,6 @@
 package Books.FPScalaManning
 
+import Books.FPScalaManning.Option
 sealed trait List[+A]
 case object Nil extends List[Nothing]
 case class Cons[+A](head: A, tail: List[A]) extends List[A]
@@ -72,13 +73,79 @@ object List {
 
   def lengthUsingFoldLeft(xs: List[Int]): Int = foldLeft(xs, 0)((x, y) => x + 1)
 
-
   def reverse[A](xs: List[A]): List[A] = foldLeft(xs, List[A]())( (x, y) => Cons(y, x))
+
+  def reverseFoldRight[A](xs: List[A]): List[A] = foldRight(xs, List[A]())( (x, y) => Cons(x, y))
 
   def revTest[A](l: List[A]): List[A] = reverse(l)
 
   def append[A](x: A, xs: List[A]): List[A] = foldLeft(reverse(xs), Cons(x, Nil) )( (b, a) => Cons(a, b))
 
+  def appendRight[A](x: A, xs: List[A]): List[A] = foldRight(xs, Cons(x, Nil))( (a, b) => Cons(a, b))
+
+  def appendList[A](a1: List[A], a2: List[A]): List[A] = a1 match {
+    case Nil => a2
+    case Cons(h, t) => Cons(h, appendList(t, a2))
+  }
+
+  def transform(xs: List[Int]): List[Int] = xs match {
+    case Nil => Nil
+    case Cons(h, tail) => Cons( h + 1, transform(tail))
+  }
+
+  def map[A, B](xs: List[A])(f: A => B): List[B] = xs match {
+    case Nil => Nil
+    case Cons(h, tail) => Cons( f(h) , map(tail)(f))
+  }
+
+  def filter[A](as: List[A])(f: A => Boolean): List[A] = as match {
+    case Nil => Nil
+    case Cons(h, tail) if(f(h)) => Cons(h, filter(tail)(f))
+    case Cons(h, tail) => filter(tail)(f)
+  }
+
+  def transformDouble(xs: List[Double]): List[String] = xs match {
+    case Nil => Nil
+    case Cons(h, tail) => Cons(h.toString, transformDouble(tail))
+  }
+
+  def foldLeftByFoldRight[A,B](xs: List[A], z: B)(f:(B, A) => B): B = foldRight(xs, z)( (a, b) => f(b, a) )
+
+  def foldRightByFoldLeft[A, B](xs: List[A], z: B)(f: (A, B) => B): B = foldLeft(xs, z)( (b, a) => f(a, b))
+
+  def concatenates[A](xs: List[List[A]]): List[A] = foldRight(xs, Nil: List[A])( (a, b) => appendList(a, b) )
+
+
+
+  def flatMap[A, B](xs: List[A])(f: A => List[B]): List[B] = xs match {
+    case Nil => Nil
+    case Cons(h, tail) =>  concatenates(map(xs)(f))
+  }
+
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -19,5 +19,12 @@ GET     /btest                          controllers.HomeController.barcode
 GET     /rev                            controllers.HomeController.reverseList
 GET     /append                         controllers.HomeController.appendList
 
+
 GET     /f                              controllers.HomeController.contentType
 GET     /test                           controllers.HomeController.multipleData
+GET     /reverseRight                   controllers.HomeController.reverseFR
+GET     /appendRight                    controllers.HomeController.appendRight
+GET     /transform                      controllers.HomeController.transform
+GET     /transformD                     controllers.HomeController.transformDouble
+GET     /map                            controllers.HomeController.map
+GET     /filter                         controllers.HomeController.filter

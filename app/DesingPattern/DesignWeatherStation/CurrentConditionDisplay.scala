@@ -8,7 +8,8 @@ class CurrentConditionDisplay extends DisplayElement with Observer {
 
 
   override def display: Unit = {
-    println("Current Condition : "+temp+
+    println(
+      "Current Condition : "+temp+
       "\n F degrees and "+ humidity +" % humidity " +
       "\n pressure = "+pressure
     )

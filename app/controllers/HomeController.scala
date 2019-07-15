@@ -102,11 +102,43 @@ play.api.i18n .I18nSupport {
     Ok("")
   }
 
+  def reverseFR = Action{ implicit request =>
+    import Books.FPScalaManning.Nil
+
+    val ans = Books.FPScalaManning.List.reverseFoldRight(Cons(1, Cons(2, Cons(3, Nil))))
+    print(ans)
+    Ok("")
+  }
+
   def appendList = Action { implicit request =>
     import Books.FPScalaManning.Nil
     val ans = Books.FPScalaManning.List.append(4, Cons(1, Cons(2, Nil)))
     println("output = "+ans)
 
+    Ok("")
+  }
+
+  def appendRight = Action { implicit request =>
+    import Books.FPScalaManning._
+
+    val ans = List.appendRight(3, Cons(1, Cons(2, Nil)))
+    println("output  = "+ans)
+    Ok("")
+  }
+
+  def transform = Action{ implicit request =>
+    import Books.FPScalaManning._
+
+    val ans = List.transform(Cons(1, Cons(2, Cons(3, Nil))))
+
+    println(ans)
+    Ok("")
+  }
+
+  def transformDouble = Action{ implicit request =>
+    import Books.FPScalaManning._
+    val ans = List.transformDouble(Cons(1d, Cons(2d, Cons(3d, Nil))))
+    println(ans)
     Ok("")
   }
 
@@ -117,8 +149,48 @@ play.api.i18n .I18nSupport {
     )
   }
 
+  def map = Action { implicit request =>
+    import Books.FPScalaManning._
+    val ans = List.map(List(1,2,3,4))(x => x + 1)
+    println("output is = "+ans)
+    Ok("")
+  }
+
+
+  def filter = Action{ implicit request =>
+
+    import Books.FPScalaManning._
+    val ans = List.filter(Cons(1, Cons(2, Cons(3, Nil))))( x => x % 2 == 0)
+
+    println("output is = "+ans)
+    Ok("")
+  }
+
   def multipleData = Action { implicit request =>
     Ok(ExampleViews.html.genericData(List(1,2,3)))
+  }
+
+
+  def failingFn(i: Int): Int = {
+
+    val y: Int = throw new Exception("fail!")
+
+    try{
+      val x = 42 + 5
+      x + y
+    }catch {
+      case e: Exception => 42
+    }
+  }
+
+  def failingFn2(i: Int): Int = {
+    try {
+      val x = 42 + 5
+      x + ((throw new Exception("fail!")): Int)
+
+    } catch {
+      case e: Exception => 42
+    }
   }
 
 
