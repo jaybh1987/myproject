@@ -81,6 +81,8 @@ object List {
 
   def append[A](x: A, xs: List[A]): List[A] = foldLeft(reverse(xs), Cons(x, Nil) )( (b, a) => Cons(a, b))
 
+  def append1[A](x1: List[A], x2: List[A]): List[A] = foldRight(x1, x2)( (a, b) => Cons(a, b))
+
   def appendRight[A](x: A, xs: List[A]): List[A] = foldRight(xs, Cons(x, Nil))( (a, b) => Cons(a, b))
 
   def appendList[A](a1: List[A], a2: List[A]): List[A] = a1 match {
@@ -115,13 +117,29 @@ object List {
 
   def concatenates[A](xs: List[List[A]]): List[A] = foldRight(xs, Nil: List[A])( (a, b) => appendList(a, b) )
 
-
-
   def flatMap[A, B](xs: List[A])(f: A => List[B]): List[B] = xs match {
     case Nil => Nil
     case Cons(h, tail) =>  concatenates(map(xs)(f))
   }
 
+  // List(1, 2, 3) , List( 2, 3, 4) then output is List(3, 5, 7)
+  def correspondingSum(x1: List[Int], x2: List[Int]): List[Int] = x1 match {
+    case Nil => x2 match {
+      case Nil => Nil
+      case Cons(h, tail) => Cons(h , tail)
+    }
+    case Cons(h, tail) => x2 match {
+      case Nil => Nil
+      case Cons(hh, ttail) => Cons(h + hh, correspondingSum(tail, ttail))
+    }
+  }
+
+
+  def correspondingSum1(x1: List[Int], x2: List[Int]): List[Int] = (x1, x2) match {
+    case (Cons(h1, t1), Cons(h2, t2)) => Cons(h1 + h2, correspondingSum1(t1, t2))
+    case (Nil, _) => Nil
+    case (_, Nil) => Nil
+  }
 
 }
 

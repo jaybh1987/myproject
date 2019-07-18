@@ -5,13 +5,11 @@ class Duck {
   var opFlyBehavior: Option[FlyBehavior] = None
   var opQuackBehavior: Option[QuackBehavior] = None
 
-
   def performQuack = {
     opQuackBehavior.map { quackBehavior =>
       quackBehavior.quack
     }
   }
-
 
   def performFly = {
     opFlyBehavior.map { flyBehavior =>
