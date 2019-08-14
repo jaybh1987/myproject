@@ -18,7 +18,7 @@ GET     /call                           controllers.HomeController.showData
 GET     /btest                          controllers.HomeController.barcode
 GET     /rev                            controllers.HomeController.reverseList
 GET     /append                         controllers.HomeController.appendList
-
+GET     /testing                        controllers.HomeController.testingApi
 
 GET     /f                              controllers.HomeController.contentType
 GET     /test                           controllers.HomeController.multipleData

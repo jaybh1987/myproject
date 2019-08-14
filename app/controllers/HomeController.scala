@@ -57,6 +57,22 @@ play.api.i18n .I18nSupport {
     Ok("")
   }
 
+  def testingApi = Action{ implicit request =>
+
+    val a = List(1,2,3)
+    val b = List(11,12)
+
+    val k = a.map(x => x + 1).map(b => b + 2)
+
+//    val k = for{
+//      i <- a.map(xx => xx + 1)
+//      j <- b
+//      m = i + j
+//    } yield(m)
+
+    Ok(k.toString)
+  }
+
 
   def modelDuck = Action{ implicit request =>
 

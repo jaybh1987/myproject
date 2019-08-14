@@ -134,13 +134,18 @@ object List {
     }
   }
 
-
   def correspondingSum1(x1: List[Int], x2: List[Int]): List[Int] = (x1, x2) match {
     case (Cons(h1, t1), Cons(h2, t2)) => Cons(h1 + h2, correspondingSum1(t1, t2))
     case (Nil, _) => Nil
     case (_, Nil) => Nil
   }
 
+  def zipWith[A, B](xs: List[A], xxs: List[A])(f: (List[A], List[A]) => List[B]): List[B] = (xs, xxs) match {
+    case(a1, a2) => f(a1, a2)
+    case (_, Nil) => Nil
+    case (Nil,_) => Nil
+  }
+  def hasSubSequence[A](sup: List[A], sub: List[A]): Boolean = ???
 }
 
 
