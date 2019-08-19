@@ -5,8 +5,7 @@ case class Branch[A](left: Tree[A], right: Tree[A]) extends Tree[A]
 
 
 class MyTree
-
-object MyTree{
+object MyTree {
 
   val a = Branch(
     Branch(Branch(Leaf(4), Leaf(6)), Leaf(2)),
@@ -40,4 +39,10 @@ object MyTree{
     case Branch(l, r) => 1 + depth(l).max(depth(r))
   }
 
+  def map[A, B](xs: Tree[A])(f: A => B): Tree[B] = xs match {
+    case Leaf(value) => Leaf(f(value))
+    case Branch(l, r) => Branch( map(l)(f), map(r)(f))
+  }
+
 }
+
