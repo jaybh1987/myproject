@@ -5,6 +5,7 @@ case class Branch[A](left: Tree[A], right: Tree[A]) extends Tree[A]
 
 
 class MyTree
+
 object MyTree {
 
   val a = Branch(
@@ -44,5 +45,20 @@ object MyTree {
     case Branch(l, r) => Branch( map(l)(f), map(r)(f))
   }
 
+
+  /*
+  * generalizing function rules
+  * 1st - take the subexpression out and make it function arguments
+  * 2nd - if sub expression refers any local variable then
+  * turn that subexpression into a function which accept this variables as an arguments.
+  * */
+
+
 }
+
+
+
+
+
+
 

@@ -2,22 +2,42 @@ package Books.nintynineproblemofscala
 
 class BasicTask {
 
+
+
+
 }
 
 
-object Algorithm{
+object Task {
+
+  val a = List(1,5,20,30,10,40)
+
+  def fun(a: scala.collection.mutable.ArrayBuffer[Int]) = {
+
+    var i = 0
+    var atTop = (0,0)
+    var atSecondTop = (0,0)
+
+    // val a = scala.collection.mutable.ArrayBuffer[Int](1,120,1, 120)
+
+    a.zipWithIndex.map {
+      case (value, position) => if( value > atTop._1) atTop = (value, position)
+    }
+
+    a.zipWithIndex.filter( x => x._2 != atTop._2).map {
+      case (value, position) => if( value > atSecondTop._1) atSecondTop = (value, position)
+    }
+
+    val data = Seq(atTop, atSecondTop)
 
 
-  def fun(arr: scala.collection.mutable.ArrayBuffer[Int]) = {
+    val min_value = data.map(tup => tup._1).min
+    val max_position = data.map( tup => tup._2).max
+    val min_position = data.map( tup => tup._2).min
 
-    val leftSide = arr(0)
+    min_value * (max_position - min_position)
 
-    val ans = for{
-      i <- 1 until arr.length
-      j <- 2 until arr.length
-      maxRightSide = if(arr(i) < arr(j)) arr(i) else arr(j)
-    }yield(maxRightSide)
-    val output = Array(leftSide, ans.max).min * ( arr.length - 1)
-    output
   }
+
+
 }
