@@ -1,8 +1,9 @@
 package Books.FPScalaManning
 
 sealed trait Option[+A]{
+
   def map[B](f: A => B): Option[B] = this match {
-    case Some(value) =>
+    case Some(value) => Some(f(value))
     case None => None
   }
 
@@ -25,10 +26,16 @@ sealed trait Option[+A]{
     case Some(value) => if(f(value)) Some(value) else None
     case None => None
   }
+
+  def lift[A, B](f: A => B): Option[A] => Option[B] = _.map(f)
+
+  def f(x: Int): Double = x.toDouble
+
+  def liftingInt(f: Int => Double) : Option[Int] => Option[Double] = x => x.map(f)
+
 }
 case class Some[A](get: A) extends Option[A]
 case object None extends Option[Nothing]
-
 
 
 
@@ -52,4 +59,37 @@ object Handling {
     if(xs.isEmpty) None
     else Some( xs.sum / xs.length)
   }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
