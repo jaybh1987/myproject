@@ -1,7 +1,6 @@
 package Books.nintynineproblemofscala
 
-class BasicTask {
-
+object BasicTask {
 
 
 

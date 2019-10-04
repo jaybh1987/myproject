@@ -102,6 +102,16 @@ object ClassList {
     }
   }
 
+
+//  def sequence[A](a: List[Option[A]]): Option[List[A]] = a match {
+//    case List(Some(value)) => value
+//    case _ => value
+//  }
+
+  def sequence[A](a: List[Option[A]]): List[A] = a match {
+    case Some(h) :: tail => h :: sequence(tail)
+    case Nil => Nil
+  }
 }
 
 

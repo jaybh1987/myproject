@@ -1,5 +1,4 @@
 package Books.FPScalaManning
-
 sealed trait Option[+A]{
 
   def map[B](f: A => B): Option[B] = this match {
@@ -33,12 +32,18 @@ sealed trait Option[+A]{
 
   def liftingInt(f: Int => Double) : Option[Int] => Option[Double] = x => x.map(f)
 
+  def map2[A, B, C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] = (a, b) match {
+    case (Some(value_a), Some(value_b)) => Some(f(value_a, value_b))
+    case (_ , _) => None
+  }
+
+  //start reading from page 56.
 }
+
+
+
 case class Some[A](get: A) extends Option[A]
 case object None extends Option[Nothing]
-
-
-
 
 object Handling {
 
@@ -62,6 +67,29 @@ object Handling {
 
 }
 
+trait Facility[M[A]]{
+
+  def map[A, B](x: M[A])(f: A => B): M[B]
+
+  def lift[A, B](f: A => B): M[A] => M[B] = map(_)(f)
+
+}
+
+
+trait Functor[F[A]] {
+  def map[A, B](a: F[A])(f: A => B): F[B]
+}
+
+object OptionFunctor extends Functor[Option] {
+  override def map[A, B](a: Option[A])(f: A => B): Option[B] = a.map(f)
+
+
+  // def sequence[A](x: List[Option[A]]): Option[List[A]] = x match {
+  // case h :: tail => h :: sequence(x)
+  // case Nil => Some(Nil)
+  // }
+
+}
 
 
 
@@ -91,5 +119,36 @@ object Handling {
 
 
 
+
+
+
+
+
+
+
+object A {
+  def lift[A, B, M[_]](f: A => B)(ma: Functor[M]): M[A] => M[B] = { a =>
+    ma.map(a)(f)
+  }
+  val f: Int => Int = x => x + x
+  val run = lift(f)(OptionFunctor)
+}
+
+//def f[A](x: List[Option[A]]): Option[List[A]] = x match {
+//
+//  case h :: tail =>
+//    if(h.isDefined) {
+//
+//      h.map(x => x :: Nil)
+//
+//      h.map( x => x :: tail.map(b => b))
+//
+//      } else
+//      {
+//        None
+//      }
+//  case Nil => None
+//
+//}
 
 

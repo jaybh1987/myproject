@@ -1,6 +1,16 @@
 package Books.problemsOfScala
 
-class Example
+class Example{
+
+  class TaskForOption{
+    
+    def sequence[A](a: List[Option[A]]): Option[List[A]] = a match {
+      case Some(h) :: tail => sequence(tail).map(x => h +: x)
+      case None :: _ => None
+      case Nil => Some(Nil)
+    }
+  }
+}
 
 object Example {
 
