@@ -1,14 +1,28 @@
 package Books.problemsOfScala
 
+
 class Example{
 
   class TaskForOption{
-    
+
     def sequence[A](a: List[Option[A]]): Option[List[A]] = a match {
       case Some(h) :: tail => sequence(tail).map(x => h +: x)
       case None :: _ => None
       case Nil => Some(Nil)
     }
+
+    def parseInts(a: List[String]): Option[List[Int]] = sequence(a.map(i => Some(i.toInt)))
+
+    def map2[A, B, C](a: Option[A], b: Option[B])(f: (A, B) => C): Option[C] = (a, b) match {
+      case (Some(value_a), Some(value_b)) => Some(f(value_a, value_b))
+      case (_ , _) => None
+    }
+
+    def traverse[A, B](x: List[A])(f: A => Option[B]): Option[List[B]] = x match {
+      case h :: tail => map2( f(h), traverse(tail)(f))(  (x, y ) => x :: y)
+      case Nil => Some(Nil)
+    }
+
   }
 }
 

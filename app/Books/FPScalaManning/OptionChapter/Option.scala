@@ -1,4 +1,5 @@
-package Books.FPScalaManning
+package Books.FPScalaManning.OptionChapter
+
 sealed trait Option[+A]{
 
   def map[B](f: A => B): Option[B] = this match {
@@ -40,11 +41,19 @@ sealed trait Option[+A]{
   //start reading from page 56.
 }
 
-
-
 case class Some[A](get: A) extends Option[A]
 case object None extends Option[Nothing]
 
+
+object Option{
+
+
+  def map2[A, B, C](x1: Option[A], x2: Option[B])(f:(A, B) => C): Option[C] = for {
+    valueA <- x1
+    valueB <- x2
+  } yield ( f(valueA, valueB))
+
+}
 object Handling {
 
   def mean(xs: Seq[Double]): Double = {
@@ -60,7 +69,7 @@ object Handling {
     else xs.sum / xs.length
   }
 
-  def mean_2(xs: Seq[Double]): Books.FPScalaManning.Option[Double] = {
+  def mean_2(xs: Seq[Double]): Option[Double] = {
     if(xs.isEmpty) None
     else Some( xs.sum / xs.length)
   }
@@ -90,40 +99,6 @@ object OptionFunctor extends Functor[Option] {
   // }
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 object A {
