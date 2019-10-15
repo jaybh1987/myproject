@@ -236,18 +236,18 @@ play.api.i18n .I18nSupport {
 
       row = sheet.createRow( {rowcount += 1; rowcount})
 
-      field <- 0 until abook.length
+      counter <- 0 until abook.length
 
-      cell = row.createCell(field)
+      cell = row.createCell(counter)
 
       _ = println("column count --"+columnCount)
 
-      out = if (abook(field).isInstanceOf[String]){
-        println("yes String."+abook(field).asInstanceOf[String])
-        cell.setCellValue(abook(field).asInstanceOf[String])
+      out = if (abook(counter).isInstanceOf[String]){
+        println("yes String."+abook(counter).asInstanceOf[String])
+        cell.setCellValue(abook(counter).asInstanceOf[String])
       } else {
         println("yes int.")
-        cell.setCellValue(abook(field).asInstanceOf[Int])
+        cell.setCellValue(abook(counter).asInstanceOf[Int])
       }
 
     } yield()
