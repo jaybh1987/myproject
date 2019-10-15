@@ -1,17 +1,15 @@
 package controllers
 
 import java.io.File
+import java.lang.Object
 
 import Books.FPScalaManning.Cons
 import DesingPattern.DesignPatternDuck._
 import DesingPattern.DesignWeatherStation.{WeatherStation, WeatherStationPull}
-import akka.http.impl.util.JavaAccessors
-import akka.stream.scaladsl.{FileIO, Source}
-import akka.util.ByteString
 import javax.inject._
 import play.api.mvc._
-import play.http.HttpEntity
 import work.CodeB
+
 import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
@@ -209,5 +207,62 @@ play.api.i18n .I18nSupport {
     }
   }
 
+  def excelWork = Action {
+    implicit request =>
+
+    import java.io.FileOutputStream
+    import java.io.IOException
+    import org.apache.poi.ss.usermodel.Cell
+    import org.apache.poi.ss.usermodel.Row
+    import org.apache.poi.xssf.usermodel.XSSFSheet
+    import org.apache.poi.xssf.usermodel.XSSFWorkbook
+
+    val workbook = new XSSFWorkbook()
+    val sheet = workbook.createSheet("scala books.")
+
+    val bookData =  List(
+      List("headfirst java", "kathy serria", 79),
+      List("java", "kathy bloch", 73),
+      List("clean code", "kathy serria", 73),
+      List("thinking in java", "kathy serria", 73)
+    )
+
+    var rowcount = 0
+    var columnCount = 0
+
+    val k = for {
+
+      abook <- bookData
+
+      row = sheet.createRow( {rowcount += 1; rowcount})
+
+      field <- 0 until abook.length
+
+      cell = row.createCell(field)
+
+      _ = println("column count --"+columnCount)
+
+      out = if (abook(field).isInstanceOf[String]){
+        println("yes String."+abook(field).asInstanceOf[String])
+        cell.setCellValue(abook(field).asInstanceOf[String])
+      } else {
+        println("yes int.")
+        cell.setCellValue(abook(field).asInstanceOf[Int])
+      }
+
+    } yield()
+
+
+      try{
+        val outputStream: FileOutputStream = new FileOutputStream("/home/laitmatus/Desktop/scalabook.xlsx")
+
+        workbook.write(outputStream)
+      } catch {
+        case e: Exception => e.printStackTrace()
+      }
+
+
+    Ok(100.toString)
+  }
 
 }

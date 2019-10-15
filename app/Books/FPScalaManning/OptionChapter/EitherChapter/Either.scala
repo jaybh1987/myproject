@@ -1,6 +1,7 @@
 package Books.FPScalaManning.OptionChapter.EitherChapter
-
 import java.nio.channels.CompletionHandler
+
+
 
 trait Either[+E, +A] {
 
