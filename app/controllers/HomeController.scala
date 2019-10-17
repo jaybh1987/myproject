@@ -7,6 +7,7 @@ import Books.FPScalaManning.Cons
 import DesingPattern.DesignPatternDuck._
 import DesingPattern.DesignWeatherStation.{WeatherStation, WeatherStationPull}
 import javax.inject._
+import org.mongodb.scala.{MongoClient, MongoClientSettings, ServerAddress}
 import play.api.mvc._
 import work.CodeB
 
@@ -32,6 +33,30 @@ play.api.i18n .I18nSupport {
     Ok("")
   }
 
+
+
+  def mongoTest = Action {
+    implicit request: Request[AnyContent] =>
+
+      import scala.collection.JavaConverters._
+
+      val settings: MongoClientSettings =
+        MongoClientSettings
+          .builder()
+          .applyToClusterSettings( b =>
+            b.hosts(
+
+              List(
+                new ServerAddress("localhost")
+              ).asJava
+            ).description("Local Server")
+          ).build()
+
+      val client: MongoClient = MongoClient(settings)
+
+      Ok("")
+
+  }
 
   def barcode = Action{ implicit  request: Request[AnyContent] =>
 
@@ -260,8 +285,6 @@ play.api.i18n .I18nSupport {
       } catch {
         case e: Exception => e.printStackTrace()
       }
-
-
     Ok(100.toString)
   }
 
