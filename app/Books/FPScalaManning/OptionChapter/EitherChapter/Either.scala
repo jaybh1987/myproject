@@ -1,6 +1,8 @@
 package Books.FPScalaManning.OptionChapter.EitherChapter
 import java.nio.channels.CompletionHandler
 
+import scala.collection.mutable.ArrayBuffer
+
 
 sealed trait Either[+E, +A]{
 
@@ -15,10 +17,23 @@ sealed trait Either[+E, +A]{
   }
 
   def orElse[EE >: E,B >: A](b: => Either[EE, B]): Either[EE, B] = this match {
-    case Left(value) => Left(value)
-    case Right(value) => b
+    case Left(_) => b
+    case Right(value) => Right(value)
   }
+
+  def map2[EE >: E, B, C](b: Either[EE, B])(f: (A, B) => C): Either[EE, C] = {
+    for{
+      i <- this
+      b1 <- b
+    } yield(f(i, b1))
+  }
+
+  def sequence[E, A](es: List[Either[E, A]]): Either[E, List[A]] = ???
+  def traverse[E, A, B](as: List[A])(f: A => Either[E, B]): Either[E, List[B]] = ???
 
 }
 case class Left[+E](value: E) extends Either[E, Nothing]
 case class Right[+A](value: A) extends Either[Nothing, A]
+
+
+
