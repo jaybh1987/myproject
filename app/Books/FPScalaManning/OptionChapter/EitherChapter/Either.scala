@@ -29,12 +29,10 @@ sealed trait Either[+E, +A]{
   }
 
   def sequence[E, A](es: List[Either[E, A]]): Either[E, List[A]] = es match{
-
     case h :: tail => h match {
       case Right(value) =>  sequence(tail).map( x => x :+ value)
       case Left(value) => Left(value)
     }
-
     case Nil => Right(Nil)
   }
 

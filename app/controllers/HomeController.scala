@@ -2,13 +2,20 @@ package controllers
 
 import java.io.File
 import java.lang.Object
+import java.nio.file.Path
+import java.util.Collections
 
 import Books.FPScalaManning.Cons
 import DesingPattern.DesignPatternDuck._
 import DesingPattern.DesignWeatherStation.{WeatherStation, WeatherStationPull}
+import akka.parboiled2.RuleTrace.Optional
+import akka.stream.scaladsl.FileIO
 import javax.inject._
 import org.mongodb.scala.{MongoClient, MongoClientSettings, ServerAddress}
+import play.api.http
+import play.api.http.HttpEntity
 import play.api.mvc._
+import utils.ExcelUtil
 import work.CodeB
 
 import scala.concurrent.ExecutionContext.Implicits.global
@@ -31,6 +38,18 @@ play.api.i18n .I18nSupport {
   def index() = Action { implicit request: Request[AnyContent] =>
 
     Ok("")
+  }
+
+  def fileTest = Action {
+
+      implicit request: Request[AnyContent] =>
+
+
+        ExcelUtil.exportExcep
+
+        val f = new java.io.File("/tmp/scalabook.xlsx")
+        
+      Ok.sendFile(f)
   }
 
 

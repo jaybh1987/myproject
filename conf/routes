@@ -29,3 +29,4 @@ GET     /transformD                     controllers.HomeController.transformDoub
 GET     /map                            controllers.HomeController.map
 GET     /filter                         controllers.HomeController.filter
 GET     /createExcel                    controllers.HomeController.excelWork
+GET     /filetest                       controllers.HomeController.fileTest
