@@ -41,14 +41,9 @@ play.api.i18n .I18nSupport {
   }
 
   def fileTest = Action {
-
       implicit request: Request[AnyContent] =>
-
-
         ExcelUtil.exportExcep
-
         val f = new java.io.File("/tmp/scalabook.xlsx")
-        
       Ok.sendFile(f)
   }
 
