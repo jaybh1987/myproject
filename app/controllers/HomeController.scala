@@ -1,23 +1,16 @@
 package controllers
 
 import java.io.File
-import java.lang.Object
-import java.nio.file.Path
-import java.util.Collections
+
 
 import Books.FPScalaManning.Cons
 import DesingPattern.DesignPatternDuck._
 import DesingPattern.DesignWeatherStation.{WeatherStation, WeatherStationPull}
-import akka.parboiled2.RuleTrace.Optional
-import akka.stream.scaladsl.FileIO
 import javax.inject._
-import org.mongodb.scala.{MongoClient, MongoClientSettings, ServerAddress}
-import play.api.http
-import play.api.http.HttpEntity
+import org.mongodb.scala._
 import play.api.mvc._
 import utils.ExcelUtil
-import work.CodeB
-
+import work.SyncCallBack.{A, B}
 import scala.concurrent.ExecutionContext.Implicits.global
 
 /**
@@ -25,7 +18,9 @@ import scala.concurrent.ExecutionContext.Implicits.global
  * application's home page.
  */
 @Singleton
-class HomeController @Inject()(cc: ControllerComponents) extends AbstractController(cc) with
+class HomeController @Inject()(
+                                cc: ControllerComponents
+                              ) extends AbstractController(cc) with
 play.api.i18n .I18nSupport {
 
   /**
@@ -47,37 +42,6 @@ play.api.i18n .I18nSupport {
       Ok.sendFile(f)
   }
 
-
-
-  def mongoTest = Action {
-    implicit request: Request[AnyContent] =>
-
-      import scala.collection.JavaConverters._
-
-      val settings: MongoClientSettings =
-        MongoClientSettings
-          .builder()
-          .applyToClusterSettings( b =>
-            b.hosts(
-
-              List(
-                new ServerAddress("localhost")
-              ).asJava
-            ).description("Local Server")
-          ).build()
-
-      val client: MongoClient = MongoClient(settings)
-
-      Ok("")
-
-  }
-
-  def barcode = Action{ implicit  request: Request[AnyContent] =>
-
-      val c = new CodeB
-      c.fun("12345678")
-      Ok("")
-  }
 
   def duckFly = Action { implicit  request =>
 
@@ -223,6 +187,31 @@ play.api.i18n .I18nSupport {
     Ok(ExampleViews.html.genericData(List(1,2,3)))
   }
 
+  def synDemo = Action{
+    implicit request =>
+
+      val obj = new B()
+      val mListner = new A()
+
+      obj.registerOnGreekEventListner(mListner)
+      obj.doGreekStuff()
+      Ok("synDemo called.")
+  }
+
+  def aysDemo = Action {
+    implicit request =>
+
+      val obj = new work.AsyncCallBack.B()
+
+      val mlistener = new work.AsyncCallBack.A()
+
+      obj.registerOnGreekEventListener(mlistener)
+
+      obj.doGreekStuff
+
+      Ok("aysDemo called.")
+  }
+
 
   def failingFn(i: Int): Int = {
 
@@ -300,6 +289,33 @@ play.api.i18n .I18nSupport {
         case e: Exception => e.printStackTrace()
       }
     Ok(100.toString)
+  }
+
+  def mongoTest = Action {
+
+    implicit request =>
+
+
+
+      val mongoClient : MongoClient =  MongoClient()
+      val database : MongoDatabase = mongoClient.getDatabase("mydb")
+
+      val collection : MongoCollection[Document] = database.getCollection("test")
+
+      val doc: Document = Document(
+        "_id" -> 0,
+        "name" -> "MongoDB",
+        "type" -> "database",
+        "count" -> 1,
+        "info" -> Document(
+          "x" -> 203,
+          "y" -> 102
+        )
+      )
+
+      collection.insertOne(doc)
+
+      Ok("mongo test.")
   }
 
 }
