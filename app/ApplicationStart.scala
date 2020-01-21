@@ -22,6 +22,6 @@ class ApplicationStart @Inject()(
   // Start scheduling
   val scheduler = QuartzSchedulerExtension(system)
   val receiver = system.actorOf(Props.create(classOf[GuiceActorProducer], injector, classOf[HelloActor]))
-  scheduler.schedule("every15seconds", receiver, HelloActor.SayHello("Peter"), None)
+  scheduler.schedule("every15seconds", receiver, HelloActor.SayHello("Jay bhavsar"), None)
 
 }
