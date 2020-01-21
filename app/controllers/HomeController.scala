@@ -2,16 +2,24 @@ package controllers
 
 import java.io.File
 
-
 import Books.FPScalaManning.Cons
 import DesingPattern.DesignPatternDuck._
 import DesingPattern.DesignWeatherStation.{WeatherStation, WeatherStationPull}
+
 import javax.inject._
 import org.mongodb.scala._
 import play.api.mvc._
 import utils.ExcelUtil
 import work.SyncCallBack.{A, B}
+
 import scala.concurrent.ExecutionContext.Implicits.global
+import play.api.mvc._
+import akka.actor._
+import javax.inject._
+import akka.pattern._
+import akka.util.Timeout
+import com.typesafe.akka.extension.quartz.QuartzSchedulerExtension
+
 
 /**
  * This controller creates an `Action` to handle HTTP requests to the
@@ -19,7 +27,8 @@ import scala.concurrent.ExecutionContext.Implicits.global
  */
 @Singleton
 class HomeController @Inject()(
-                                cc: ControllerComponents
+                                cc: ControllerComponents,
+                                system: ActorSystem
                               ) extends AbstractController(cc) with
 play.api.i18n .I18nSupport {
 
@@ -30,6 +39,9 @@ play.api.i18n .I18nSupport {
    * will be called when the application receives a `GET` request with
    * a path of `/`.
    */
+
+
+
   def index() = Action { implicit request: Request[AnyContent] =>
 
     Ok("")
