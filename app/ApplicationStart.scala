@@ -25,3 +25,16 @@ class ApplicationStart @Inject()(
   scheduler.schedule("every15seconds", receiver, HelloActor.SayHello("Jay bhavsar"), None)
 
 }
+
+
+object My {
+
+  val word = List('a','a','b','a','a')
+
+  word.foldLeft(List('a')) {
+    (default, element) =>
+      default match {
+        case h :: tail => if(h == element) default :+ element else List(element)
+      }
+  }
+}

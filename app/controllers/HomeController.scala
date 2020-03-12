@@ -26,10 +26,7 @@ import com.typesafe.akka.extension.quartz.QuartzSchedulerExtension
  * application's home page.
  */
 @Singleton
-class HomeController @Inject()(
-                                cc: ControllerComponents,
-                                system: ActorSystem
-                              ) extends AbstractController(cc) with
+class HomeController @Inject()(cc: ControllerComponents) extends AbstractController(cc) with
 play.api.i18n .I18nSupport {
 
   /**
