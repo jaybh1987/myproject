@@ -14,7 +14,7 @@ object ScalaManning {
   }
 
   //polymorphic function to find a   string in array.
-  def findFirst[A](ss: Array[A], p: (A) => Boolean): Int = {
+  def findFirst[A](ss: Array[A], p: A => Boolean): Int = {
 
     def loop(n: Int): Int = {
       if(n >= ss.length) -1
@@ -41,7 +41,7 @@ object ScalaManning {
 
   def fun(a: Int, b: Int): Boolean = a > b
 
-  def isSorted[A](ar: Array[A], f:(A, A)=> Boolean) = {
+  def isSorted[A](ar: Array[A], f:(A, A)=> Boolean): Boolean = {
     def loop(n: Int): Boolean = {
       if(n >= ar.length - 1) true
       else if ( f( ar(n), ar(n + 1)) ) loop(n + 1)

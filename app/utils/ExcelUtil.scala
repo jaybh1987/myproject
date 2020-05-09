@@ -33,7 +33,6 @@ object ExcelUtil {
 
       cell = row.createCell(counter)
 
-      _ = println("column count --"+columnCount)
 
       out = if (abook(counter).isInstanceOf[String]){
         println("yes String."+abook(counter).asInstanceOf[String])

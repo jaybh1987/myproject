@@ -37,8 +37,6 @@ play.api.i18n .I18nSupport {
    * a path of `/`.
    */
 
-
-
   def index() = Action { implicit request: Request[AnyContent] =>
 
     Ok("")
