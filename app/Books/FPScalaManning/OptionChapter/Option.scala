@@ -109,21 +109,41 @@ object A {
   val run = lift(f)(OptionFunctor)
 }
 
-//def f[A](x: List[Option[A]]): Option[List[A]] = x match {
-//
-//  case h :: tail =>
-//    if(h.isDefined) {
-//
-//      h.map(x => x :: Nil)
-//
-//      h.map( x => x :: tail.map(b => b))
-//
-//      } else
-//      {
-//        None
-//      }
-//  case Nil => None
-//
-//}
+
+
+trait Functor2[M[A]] {
+
+  def map[A, B](x: M[A])(f: A => B): M[B]
+
+  def lift[A, B](f: A => B): M[A] => M[B] = x => map(x)(f)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

@@ -21,6 +21,15 @@ import scala.collection.mutable.Stack
 
 object StackPostFix {
 
+
+
+  def myfunction(number: Int)(default: Int)(f: (Int, Int) => Int): Int = {
+
+    if(number == 0) default
+    else myfunction(number - 1)(f(default, number))(f)
+  }
+
+
   import scala.collection.mutable.Stack
 
   var ch = "A+(B*C-(D/E^F)*G)*H".toList

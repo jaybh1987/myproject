@@ -31,3 +31,5 @@ GET     /createExcel                    controllers.HomeController.excelWork
 GET     /filetest                       controllers.HomeController.fileTest
 GET     /sy                             controllers.HomeController.synDemo
 GET     /ay                             controllers.HomeController.aysDemo
+
+GET     /orderCoffee                    controllers.DecoratorController.orderCoffee

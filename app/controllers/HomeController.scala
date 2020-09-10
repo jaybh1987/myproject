@@ -5,7 +5,6 @@ import java.io.File
 import Books.FPScalaManning.Cons
 import DesingPattern.DesignPatternDuck._
 import DesingPattern.DesignWeatherStation.{WeatherStation, WeatherStationPull}
-
 import javax.inject._
 import org.mongodb.scala._
 import play.api.mvc._
@@ -13,12 +12,6 @@ import utils.ExcelUtil
 import work.SyncCallBack.{A, B}
 
 import scala.concurrent.ExecutionContext.Implicits.global
-import play.api.mvc._
-import akka.actor._
-import javax.inject._
-import akka.pattern._
-import akka.util.Timeout
-import com.typesafe.akka.extension.quartz.QuartzSchedulerExtension
 
 
 /**
@@ -246,10 +239,7 @@ play.api.i18n .I18nSupport {
     implicit request =>
 
     import java.io.FileOutputStream
-    import java.io.IOException
-    import org.apache.poi.ss.usermodel.Cell
-    import org.apache.poi.ss.usermodel.Row
-    import org.apache.poi.xssf.usermodel.XSSFSheet
+
     import org.apache.poi.xssf.usermodel.XSSFWorkbook
 
     val workbook = new XSSFWorkbook()
