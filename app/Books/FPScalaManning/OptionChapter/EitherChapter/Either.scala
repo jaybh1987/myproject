@@ -100,9 +100,9 @@ sealed trait Either [+E, +A] {
     }
   }
 
-  def traversTwo[E, A, B](as: List[A])(f: A => Either[E, B]): Either[E, List[B]] = {
-
-  }
+//  def traversTwo[E, A, B](as: List[A])(f: A => Either[E, B]): Either[E, List[B]] = {
+//
+//  }
 
 
 

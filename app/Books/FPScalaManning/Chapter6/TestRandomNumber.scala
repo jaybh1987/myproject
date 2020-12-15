@@ -13,6 +13,7 @@ class TestRandomNumber {
 
   def rollDie(rng: scala.util.Random): Int = rng.nextInt(6)
 
+
 }
 
 
@@ -185,34 +186,66 @@ case class SimpleRNG(seed: Long) extends RNG {
   }
 
 //  val k = sequence(List(nonNegativeInt _, nonNegativeInt _, nonNegativeInt _, nonNegativeInt _))
+//
+//  def nonNegativeLessThen(n: Int): Rand[Int] = {
+//    map(nonNegativeInt){ x => x % n}
+//  }
+
+  /*
+  * This will certainly generate a number in the range, but it'll be skewd because Int.MaxValue may not be
+  * exactly divisible by n.
+  * So numbers that are less than the remainder of that division will come up more frequently.
+  * When nonNegativeInt generates numbers higher than the largest multiple of n that fits in a 32-bit integer,
+  *
+  * we should retry the generator and hope to get a smaller number. We minght attempt this:
+  *
+  * */
+
+//  def nonNegativeLessThan(n: Int): Rand[Int] = map(nonNegativeInt){ x =>
+//    val mod = x % n
+//    if(i + (n - 1) - mod >= 0) mod else nonNegativeLessThan(n)(???)
+//  }
+
+  def nonNegativeLessThan(n: Int): Rand[Int] = { rng =>
+    val (i, rng2) = nonNegativeInt(rng)
+    val mod = i % n
+
+    if(i + (n - 1) - mod >= 0) (mod, rng2) else nonNegativeLessThan(n)(rng)
+  }
+
+  def flatMap[A, B](f: Rand[A])(g: A => Rand[B]): Rand[B] = rng => {
+    val (n1, rng2) = f(rng)
+    g(n1)(rng2)
+  }
+
+  def rollDie: Rand[Int] = nonNegativeLessThan(6)
+
+  def rollDie2: Rand[Int] = map(nonNegativeLessThan(6))( r => r + 1)
+
+
+  def mapViaFlatMap[A, B](s: Rand[A])(f: A => B): Rand[B] = {
+      flatMap(s)(x => unit( f(x) ))
+  }
+
+  def map2ViaFlatMap[A, B, C](ra: Rand[A], rb: Rand[B])(f: (A, B) => C): Rand[C] = {
+    flatMap(ra){ a =>
+      rng => {
+        val (b, rngc) = rb(rng)
+        (f(a, b), rngc)
+      }
+    }
+  }
+
 }
 
 
+object simple{
 
+  val rng = SimpleRNG(45)
 
+  val a = rng.map(rng.nonNegativeInt)(x => x + 1)
 
+  val b = rng.mapViaFlatMap(rng.nonNegativeInt)( x => x + 1)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  val c = rng.map2ViaFlatMap(rng.nonNegativeInt, rng.nonNegativeInt)( (x, y) => x + y)
+}
