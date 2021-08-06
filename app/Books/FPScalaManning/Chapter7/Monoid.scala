@@ -3,10 +3,12 @@ package Books.FPScalaManning.Chapter7
 import java.util.NoSuchElementException
 
 //https://github.com/robertberry/Functional-Programming-in-Scala-Exercises/blob/master/src/main/scala/com/github/robertberry/fpis/Chapter10.scala
+
 trait Monoid[A] {
   def op(a1: A, a2: A): A
   def zero: A
 }
+
 
 object TestHello {
 
@@ -15,12 +17,18 @@ object TestHello {
     def zero = ""
   }
 
+  "foo".length + "bar".length == ("foo" + "bar").length
+  /*
+  * length is function from String to Int that preserved the monoid structure.
+  * such function called a monoid homomorphism.
+  *
+  * a monoid homomorphism f beteween monoid M and N obeys the law for all values x and y
+  *
+  * M.op( f(x), f(y) ) == f( N.op(x, y)  )
+  *
+  *
+  * */
 
-//  val listMonoid = new Monoid[List[A]] {
-//    def op(a1: List[A], a2: List[A]) = a1 ++ a2
-//
-//    def zero = Nil
-//  }
 
   val intAddition = new Monoid[Int] {
     def op(a1: Int, a2: Int) = a1 + a2
@@ -67,30 +75,10 @@ object TestHello {
         m.op(myDefaultb, f(someA))
   }
 
-  def last[A](seq: Seq[A]): A = seq match {
-    case h :: Nil => h
-    case h :: tail => last(tail)
-    case _ => throw new NoSuchElementException("Not Found")
-  }
-
-  def updateList[A](r: Seq[A], elementToAdd: A): Seq[A] = r.dropRight(1) :+ elementToAdd
-
-  def runLengthEncoding(x: String): String = {
-    x.foldLeft(Seq[(Int, Char)]()) {
-      (myDefault, element) =>
-        if(myDefault.isEmpty) myDefault :+ (1, element)
-        else {
-          val lastElm = last(myDefault)
-          if(lastElm._2 == element) updateList(myDefault, (lastElm._1 + 1, element) )
-          else myDefault :+ (1, element)
-        }
-    }.map{ case (count, alpha) => s"$count$alpha"}.mkString
-  }
-
-
 
 
 }
+
 
 
 
