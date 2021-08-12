@@ -140,7 +140,7 @@ object List {
   }
 
   def zipWith[A, B](xs: List[A], xxs: List[A])(f: (List[A], List[A]) => List[B]): List[B] = (xs, xxs) match {
-    case(a1, a2) => f(a1, a2)
+    case (a1, a2) => f(a1, a2)
     case (_, Nil) => Nil
     case (Nil,_) => Nil
   }

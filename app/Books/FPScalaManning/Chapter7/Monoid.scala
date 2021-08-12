@@ -2,7 +2,7 @@ package Books.FPScalaManning.Chapter7
 
 import java.util.NoSuchElementException
 
-//https://github.com/robertberry/Functional-Programming-in-Scala-Exercises/blob/master/src/main/scala/com/github/robertberry/fpis/Chapter10.scala
+
 
 trait Monoid[A] {
   def op(a1: A, a2: A): A
