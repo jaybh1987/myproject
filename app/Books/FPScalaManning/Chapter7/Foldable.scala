@@ -46,4 +46,6 @@ object TryFoldable {
   implicit class FoldableToListExtension[F[_]](foldable: Foldable[F]) {
     def toList[A](fa: F[A]): List[A] = foldable.foldRight(fa)(List.empty[A])( (x,y) => x :: y)
   }
+
+
 }
