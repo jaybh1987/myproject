@@ -32,11 +32,11 @@ trait Functor[F[_]] {
 
   def map[A, B](as:F[A])(f: A => B): F[B]
 
-  def distribute[A, B](fab: F[(A, B)]): (F[A], F[B]) = (map(fab)( r => r._1), map(fab)( r => r._2) )
+  def distribute[A, B](fab: F[(A, B)]): (F[A], F[B]) = (  map(fab)( r => r._1), map(fab)( r => r._2) )
 
   def codistribute[A, B](e: Either[F[A], F[B]]): F[Either[A, B]] = e match {
-    case Left(errorValue) =>  map(errorValue)( r => Left(r))
-    case Right(sucessValue) => map(sucessValue)( r => Right(r))
+    case Left(errorValue)       =>    map(errorValue)(  Left(_)  )
+    case Right(sucessValue)     =>    map(sucessValue)( Right(_)  )
   }
 
 }
